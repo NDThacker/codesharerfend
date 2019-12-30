@@ -11,9 +11,23 @@ export const getSnippetById = (sId) => {
 			err.message = error.response.data.message;
 		}
 		else {
-			err.messsage = "Unexpected Error occurred..!";
+			err.messsage = "Server Down..!";
 		}
 		throw err;
+	})
+}
+
+export const submitSnippetToUser = (sObjAndEmail) => {
+	return axios.put(apiUrl + 'submitsnippettouser', sObjAndEmail).then(response => {
+		return response.data;
+	}).catch(error => {
+		let err = new Error();
+		if(error.response) {
+			err.message = error.response.data.message;
+		}
+		else {
+			err.message = "Server Down..!";
+		}
 	})
 }
 
@@ -26,7 +40,7 @@ export const submitSnippet = (sObj) => {
 			err.message = error.response.data.message;
 		}
 		else {
-			err.message = "Unexpected Error occurred..!";
+			err.message = "Server Down..!";
 		}
 		throw err;
 	})
@@ -41,7 +55,7 @@ export const searchSnippetByTitle = (title) => {
 			err.message = error.response.data.message;
 		}
 		else {
-			err.message = "Unexpected Error occurred..!";
+			err.message = "Server Down..!";
 		}
 		throw err;
 	})
@@ -56,7 +70,7 @@ export const editSnippet = (sid, content) => {
 			err.message = error.response.data.message;
 		}
 		else {
-			err.message = "Unexpected Error occurred..!";
+			err.message = "Server Down..!";
 		}
 		throw err;
 	})
@@ -73,7 +87,7 @@ export const signUp = (udata) => {
 			err.message = error.response.data.message;
 		}
 		else {
-			err.message = "Unexpected Error occurred..!";
+			err.message = "Server Down..!";
 		}
 		throw err;
 	})
@@ -89,7 +103,7 @@ export const loginUser = (cdata) => {
 			err.message = error.response.data.message;
 		}
 		else {
-			err.message = "Unexpected Error occurred..!";
+			err.message = "Server Down..!";
 		}
 		throw err;
 	})
