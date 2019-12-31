@@ -1,8 +1,8 @@
 import React from 'react';
-import { loginUser } from '../utils/api';
+import { logInUser } from '../utils/api';
 
 
-class SignUp extends React.Component {
+class LogIn extends React.Component {
 	state = {
 		form: {
 			emailId: "",
@@ -12,7 +12,7 @@ class SignUp extends React.Component {
 			emailId: "",
 			password: ""
 		},
-		formValid: {
+		formValidity: {
 			emailId: false,
 			password: false,
 			buttonActive: false
@@ -35,10 +35,9 @@ class SignUp extends React.Component {
 		if (formMessage === "") {
 			if (!this.state.formValidity[field]) {
 				formValidityObj[field] = true;
+				if(this.state.validCount == 1)
+					formValidityObj["buttonActive"] = true;
 				this.setState({ validCount: this.state.validCount + 1 });
-			}
-			if (this.state.validCount === 2) {
-				formValidityObj["buttonActive"] = true;
 			}
 			formErrorObj[field] = "";
 			this.setState({});
@@ -47,6 +46,7 @@ class SignUp extends React.Component {
 			formErrorObj[field] = formMessage;
 			if (this.state.formValidity[field]) {
 				formValidityObj["buttonActive"] = false;
+				formValidityObj[field] = false;
 				this.setState({ validCount: this.state.validCount - 1 });
 			}
 			this.setState({});
@@ -62,7 +62,7 @@ class SignUp extends React.Component {
 	}
 	handleSubmit = (event) => {
 		event.preventDefault();
-		signUp(this.state.form).then(udata => {
+		logInUser(this.state.form).then(udata => {
 			//save udata somewhere
 		}).catch(err => {
 			console.log(err.message);
@@ -73,19 +73,22 @@ class SignUp extends React.Component {
 		return (
 			<React.Fragment>
 				<div className="container-fluid" style={{ width: "70%" }}>
+					<h3 className="display-5 text-center">Log In</h3>
 					<form onSubmit={this.handleSubmit}>
-						<div class="form-group">
-							<label for="email">Email</label>
+						<div className="form-group">
+							<label htmlFor="email">Email</label>
 							<input type="text"
-								class="form-control" onChange={this.handleChange} name="email" id="email" placeholder="Enter your EmailId" />
+								className="form-control" onChange={this.handleChange} name="emailId" id="email" placeholder="Enter your Email Id" />
+							<div className="text-danger">{this.state.formErrors.emailId}</div>
 						</div>
-						<div class="form-group">
-							<label for="password">Password</label>
+						<div className="form-group">
+							<label htmlFor="password">Password</label>
 							<input type="password"
-								class="form-control" onChange={this.handleChange} name="password" id="password" placeholder="Enter a strong password having one capital, one small alphabet as well as one digit and one special character [!, @, #, &]" />
+								className="form-control" onChange={this.handleChange} name="password" id="password" placeholder="your password" />
+							<div className="text-danger">{this.state.formErrors.password}</div>
 						</div>
 						<div>
-							<input type="submit" value="Log In" disabled={!this.state.formValid.buttonActive} />
+							<input type="submit" value="Log In" disabled={!this.state.formValidity.buttonActive} />
 						</div>
 					</form>
 				</div>
@@ -94,3 +97,5 @@ class SignUp extends React.Component {
 	}
 
 }
+
+export default LogIn;

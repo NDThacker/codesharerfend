@@ -1,5 +1,5 @@
 import React from 'react';
-import { signUp } from '../utils/api';
+import { signUpUser } from '../utils/api';
 
 
 class SignUp extends React.Component {
@@ -14,7 +14,7 @@ class SignUp extends React.Component {
 			password: "",
 			name: ""
 		},
-		formValid: {
+		formValidity: {
 			emailId: false,
 			password: false,
 			name: false,
@@ -24,7 +24,6 @@ class SignUp extends React.Component {
 	}
 	validateField(field, value) {
 		let formMessage = "";
-
 		switch (field) {
 			case "emailId":
 				formMessage = (value.match(/^\w+@[a-zA-Z]{3,6}[.](com|co.in)$/) ? "" : "Enter a valid email id");
@@ -41,10 +40,9 @@ class SignUp extends React.Component {
 		if (formMessage === "") {
 			if (!this.state.formValidity[field]) {
 				formValidityObj[field] = true;
+				if(this.state.validCount == 2)
+					formValidityObj["buttonActive"] = true;
 				this.setState({ validCount: this.state.validCount + 1 });
-			}
-			if (this.state.validCount === 3) {
-				formValidityObj["buttonActive"] = true;
 			}
 			formErrorObj[field] = "";
 			this.setState({});
@@ -53,6 +51,7 @@ class SignUp extends React.Component {
 			formErrorObj[field] = formMessage;
 			if (this.state.formValidity[field]) {
 				formValidityObj["buttonActive"] = false;
+				formValidityObj[field] = false;
 				this.setState({ validCount: this.state.validCount - 1 });
 			}
 			this.setState({});
@@ -68,7 +67,7 @@ class SignUp extends React.Component {
 	}
 	handleSubmit = (event) => {
 		event.preventDefault();
-		signUp(this.state.form).then(udata => {
+		signUpUser(this.state.form).then(udata => {
 			//save udata somewhere
 		}).catch(err => {
 			console.log(err.message);
@@ -79,24 +78,28 @@ class SignUp extends React.Component {
 		return (
 			<React.Fragment>
 				<div className="container-fluid" style={{ width: "70%" }}>
+					<h3 className="display-5 text-center">Sign Up</h3>
 					<form onSubmit={this.handleSubmit}>
-						<div class="form-group">
-							<label for="email">Email</label>
+						<div className="form-group">
+							<label htmlFor="email">Email</label>
 							<input type="text"
-								class="form-control" onChange={this.handleChange} name="email" id="email" placeholder="Enter your EmailId" />
+								className="form-control" onChange={this.handleChange} name="emailId" id="email" placeholder="Enter your Email Id" />
+							<div className="text-danger">{this.state.formErrors.emailId}</div>
 						</div>
-						<div class="form-group">
-							<label for="password">Password</label>
+						<div className="form-group">
+							<label htmlFor="password">Password</label>
 							<input type="password"
-								class="form-control" onChange={this.handleChange} name="password" id="password" placeholder="Enter a strong password having one capital, one small alphabet as well as one digit and one special character [!, @, #, &]" />
+								className="form-control" onChange={this.handleChange} name="password" id="password" placeholder="your password" />
+							<div className="text-danger">{this.state.formErrors.password}</div>
 						</div>
-						<div class="form-group">
-							<label for="name">Name</label>
+						<div className="form-group">
+							<label htmlFor="name">Name</label>
 							<input type="text"
-								class="form-control" onChange={this.handleChange} name="name" id="name" placeholder="Enter your name" />
+								className="form-control" onChange={this.handleChange} name="name" id="name" placeholder="Enter your name" />
+							<div className="text-danger">{this.state.formErrors.name}</div>
 						</div>
 						<div>
-							<input type="submit" value="Log In" disabled={!this.state.formValid.buttonActive} />
+							<input type="submit" value="Sign Up" disabled={!this.state.formValidity.buttonActive} />
 						</div>
 
 					</form>
@@ -104,5 +107,6 @@ class SignUp extends React.Component {
 			</React.Fragment>
 		)
 	}
-
 }
+
+export default SignUp;

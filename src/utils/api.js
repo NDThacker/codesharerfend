@@ -78,7 +78,7 @@ export const editSnippet = (sid, content) => {
 
 /* udata in signup consisting of name, emailid and password */
 
-export const signUp = (udata) => {
+export const signUpUser = (udata) => {
 	return axios.post(apiUrl + 'signup/', udata).then(response => {
 		return response.data;
 	}).catch(error => {
@@ -94,7 +94,7 @@ export const signUp = (udata) => {
 }
 
 /* cdata in loginUser consists of emailid and password */
-export const loginUser = (cdata) => {
+export const logInUser = (cdata) => {
 	return axios.post(apiUrl + 'login/', cdata).then(response => {
 		return response.data;
 	}).catch(error => {

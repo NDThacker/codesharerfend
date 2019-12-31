@@ -3,7 +3,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import SubmitSnippet from './components/SubmitSnippet';
 import FetchSnippet from './components/FetchSnippet';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+
 
 class App extends React.Component {
 	render() {
@@ -31,8 +33,8 @@ class App extends React.Component {
 				</nav>
 				<br />
 				<Switch>
-					{/* <Route exact path="/login" componenet={LogIn} />
-					<Route exact path="/login" componenet={LogIn} /> */}
+					<Route exact path="/login" component={LogIn} />
+					<Route exact path="/signup" component={SignUp} />
 					<Route exact path="/submitsnippet" component={SubmitSnippet} />
 					{/* <Route exact path="/viewsnippet" component={ViewSnippet} /> */}
 					<Route exact path="/fetchsnippet/:sid" component={FetchSnippet} />

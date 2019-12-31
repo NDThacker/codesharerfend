@@ -57,10 +57,9 @@ class SubmitSnippet extends React.Component {
 		if (formMessage === "") {
 			if (!this.state.formValidity[field]) {
 				formValidityObj[field] = true;
+				if(this.state.validCount == 2)
+					formValidityObj["buttonActive"] = true;
 				this.setState({ validCount: this.state.validCount + 1 });
-			}
-			if (this.state.validCount === 3) {
-				formValidityObj["buttonActive"] = true;
 			}
 			formErrorObj[field] = "";
 			this.setState({});
@@ -69,6 +68,7 @@ class SubmitSnippet extends React.Component {
 			formErrorObj[field] = formMessage;
 			if (this.state.formValidity[field]) {
 				formValidityObj["buttonActive"] = false;
+				formValidityObj[field] = false;
 				this.setState({ validCount: this.state.validCount - 1 });
 			}
 			this.setState({});
