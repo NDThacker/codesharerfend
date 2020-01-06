@@ -5,17 +5,17 @@ import { signUpUser } from '../utils/api';
 class SignUp extends React.Component {
 	state = {
 		form: {
-			emailId: "",
+			email: "",
 			password: "",
 			name: ""
 		},
 		formErrors: {
-			emailId: "",
+			email: "",
 			password: "",
 			name: ""
 		},
 		formValidity: {
-			emailId: false,
+			email: false,
 			password: false,
 			name: false,
 			buttonActive: false
@@ -25,7 +25,7 @@ class SignUp extends React.Component {
 	validateField(field, value) {
 		let formMessage = "";
 		switch (field) {
-			case "emailId":
+			case "email":
 				formMessage = (value.match(/^\w+@[a-zA-Z]{3,6}[.](com|co.in)$/) ? "" : "Enter a valid email id");
 				break;
 			case "password":
@@ -67,8 +67,8 @@ class SignUp extends React.Component {
 	}
 	handleSubmit = (event) => {
 		event.preventDefault();
-		signUpUser(this.state.form).then(udata => {
-			//save udata somewhere
+		signUpUser(this.state.form).then(status => {
+			this.props.history.push('/login');
 		}).catch(err => {
 			console.log(err.message);
 		});
@@ -83,8 +83,8 @@ class SignUp extends React.Component {
 						<div className="form-group">
 							<label htmlFor="email">Email</label>
 							<input type="text"
-								className="form-control" onChange={this.handleChange} name="emailId" id="email" placeholder="Enter your Email Id" />
-							<div className="text-danger">{this.state.formErrors.emailId}</div>
+								className="form-control" onChange={this.handleChange} name="email" id="email" placeholder="Enter your Email Id" />
+							<div className="text-danger">{this.state.formErrors.email}</div>
 						</div>
 						<div className="form-group">
 							<label htmlFor="password">Password</label>
@@ -99,7 +99,7 @@ class SignUp extends React.Component {
 							<div className="text-danger">{this.state.formErrors.name}</div>
 						</div>
 						<div>
-							<input type="submit" value="Sign Up" disabled={!this.state.formValidity.buttonActive} />
+							<input type="submit" className="btn btn-primary" value="Sign Up" disabled={!this.state.formValidity.buttonActive} />
 						</div>
 
 					</form>

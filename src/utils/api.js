@@ -100,7 +100,8 @@ export const logInUser = (cdata) => {
 	}).catch(error => {
 		let err = new Error();
 		if(error.response) {
-			err.message = error.response.data.message;
+			console.log(error.response)
+			err.message = error.response.data.error;
 		}
 		else {
 			err.message = "Server Down..!";

@@ -1,29 +1,35 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { logInUser } from '../utils/api';
+// Actions
+import { logInAction } from '../actions'
 
 
 class LogIn extends React.Component {
 	state = {
 		form: {
-			emailId: "",
+			email: "",
 			password: ""
 		},
 		formErrors: {
-			emailId: "",
+			email: "",
 			password: ""
 		},
 		formValidity: {
-			emailId: false,
+			email: false,
 			password: false,
 			buttonActive: false
 		},
-		validCount: 0
+		validCount: 0,
+		formError: ""
 	}
 	validateField(field, value) {
 		let formMessage = "";
 
 		switch (field) {
-			case "emailId":
+			case "email":
 				formMessage = (value.length > 0 ? "" : "Required field");
 				break;
 			case "password":
@@ -64,8 +70,11 @@ class LogIn extends React.Component {
 		event.preventDefault();
 		logInUser(this.state.form).then(udata => {
 			//save udata somewhere
+			console.log(udata);
+			this.props.dispatch(logInAction(udata));
+			this.props.history.push("/");
 		}).catch(err => {
-			console.log(err.message);
+			this.setState({ formError: err.message });
 		});
 	}
 
@@ -78,8 +87,8 @@ class LogIn extends React.Component {
 						<div className="form-group">
 							<label htmlFor="email">Email</label>
 							<input type="text"
-								className="form-control" onChange={this.handleChange} name="emailId" id="email" placeholder="Enter your Email Id" />
-							<div className="text-danger">{this.state.formErrors.emailId}</div>
+								className="form-control" onChange={this.handleChange} name="email" id="email" placeholder="Enter your Email Id" />
+							<div className="text-danger">{this.state.formErrors.email}</div>
 						</div>
 						<div className="form-group">
 							<label htmlFor="password">Password</label>
@@ -88,8 +97,9 @@ class LogIn extends React.Component {
 							<div className="text-danger">{this.state.formErrors.password}</div>
 						</div>
 						<div>
-							<input type="submit" value="Log In" disabled={!this.state.formValidity.buttonActive} />
+							<input type="submit" className="btn btn-primary" value="Log In" disabled={!this.state.formValidity.buttonActive} />
 						</div>
+						<span className="text-danger">{this.state.formError}</span>
 					</form>
 				</div>
 			</React.Fragment>
@@ -98,4 +108,4 @@ class LogIn extends React.Component {
 
 }
 
-export default LogIn;
+export default compose(connect(), withRouter)(LogIn);

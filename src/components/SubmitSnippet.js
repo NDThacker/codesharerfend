@@ -80,7 +80,7 @@ class SubmitSnippet extends React.Component {
 		submitSnippet(this.state.form).then(sid => {
 			//navigate to show snippet with generated id
 			if (this.state.isLoggedIn) {
-				submitSnippetToUser(this.state.form, sid, this.state.logInEmail).then(sdata => {
+				submitSnippetToUser(this.state.form, sid, this.state.logInEmail).then(status => {
 					this.props.history.push('/fetchsnippet/' + sid.url);	
 				}).catch(err => {
 					console.log(err.message);
