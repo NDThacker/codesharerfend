@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { logInUser } from '../utils/api';
 // Actions
-import { logInAction } from '../actions'
+import { logInAction, initCreated, initStarred } from '../actions';
 
 
 class LogIn extends React.Component {
@@ -71,6 +71,10 @@ class LogIn extends React.Component {
 		logInUser(this.state.form).then(udata => {
 			//save udata somewhere
 			console.log(udata);
+			this.props.dispatch(initCreated(udata.created));
+			this.props.dispatch(initStarred(udata.starred));
+			delete udata.starred;
+			delete udata.created;
 			this.props.dispatch(logInAction(udata));
 			this.props.history.push("/");
 		}).catch(err => {

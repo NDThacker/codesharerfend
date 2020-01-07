@@ -14,6 +14,7 @@ class FetchSnippet extends React.Component {
 		this.id = this.props.match.params.sid;
 		getSnippetById(this.id).then(sdata => {
 			this.state.snippet = sdata;
+			// console.log(sdata);
 			this.setState({})
 		}).catch(err => {
 			console.log(err.message);
