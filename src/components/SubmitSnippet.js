@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './NavBar';
 import { submitSnippet, submitSnippetToUser } from '../utils/api';
 import { withRouter } from 'react-router-dom';
 
@@ -34,7 +35,7 @@ class SubmitSnippet extends React.Component {
 		const enteredValue = event.target.value;
 		const newFormObj = this.state.form;
 		newFormObj[field] = enteredValue;
-		this.validateField(field, enteredValue);
+		field != 'visibility' ? this.validateField(field, enteredValue) : null;
 		this.setState({});
 	}
 	validateField = (field, value) => {
@@ -100,6 +101,7 @@ class SubmitSnippet extends React.Component {
 
 		return (
 			<React.Fragment>
+				<NavBar />
 				<div className="container-fluid" style={{ width: "70%" }}>
 					<form onSubmit={this.handleSubmit}>
 						<h2 className="display-4 text-center">Add a New Snippet</h2>
@@ -124,10 +126,10 @@ class SubmitSnippet extends React.Component {
 						</div>
 						<div className="form-check form-check-inline">
 							<label className="form-check-label">
-								<input className="form-check-input" type="radio" name="visibility" id="vpub" value="Public" defaultChecked />Public</label>
+								<input className="form-check-input" onChange={this.handleChange} type="radio" name="visibility" id="vpub" value="Public" checked={this.state.form.visibility == "Private"} />Public</label>
 							<label className="form-check-label">
-								<input disabled={!this.state.isLoggedIn} className="form-check-input" type="radio" name="visibility" id="vpriv" value="Private" />Private</label>
-							&nbsp;<span><small>Usable only if you are a logged In user</small></span>
+								<input disabled={!this.state.isLoggedIn} onChange={this.handleChange} checked={this.state.form.visibility == "Private"} className="form-check-input" type="radio" name="visibility" id="vpriv" value="Private" />Private</label>
+							&nbsp;<span><small>Usable only if you are a logged in user</small></span>
 						</div>
 						<div>
 							<input type="submit" className="btn btn-primary" value="Submit Snippet" disabled={!this.state.formValidity.buttonActive} />

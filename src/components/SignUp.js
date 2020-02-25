@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './NavBar';
 import { signUpUser } from '../utils/api';
 
 
@@ -77,6 +78,7 @@ class SignUp extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
+				<NavBar />
 				<div className="container-fluid" style={{ width: "70%" }}>
 					<h3 className="display-5 text-center">Sign Up</h3>
 					<form onSubmit={this.handleSubmit}>

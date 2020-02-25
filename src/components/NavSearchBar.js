@@ -20,7 +20,7 @@ class NavBar extends React.Component {
 						<Link className="nav-link" to="/submitsnippet">Submit-A-Snippet</Link>
 					</li>
 					<li className="nav-item" id="searchLink">
-						<Link className="nav-link" to="/searchsnippet">Search-A-Snippet</Link>
+					<input type="text" placeholder="Enter your keywords" id="searchBar" /><button id="searchButton"><i className="fa fa-search"></i></button>
 					</li>
 				</ul>
 				<ul className="navbar-nav ml-auto">

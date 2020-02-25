@@ -1,13 +1,14 @@
 import React from 'react';
 import ViewSnippet from './ViewSnippet';
+import NavBar from './NavBar';
 import { getSnippetById } from '../utils/api';
 import { withRouter } from 'react-router-dom';
 
 
 class FetchSnippet extends React.Component {
-	
+
 	state = {
-		snippet : {}
+		snippet: {}
 	};
 	constructor(props) {
 		super(props);
@@ -23,7 +24,10 @@ class FetchSnippet extends React.Component {
 
 	render() {
 		return (
-			<ViewSnippet snippet={this.state.snippet}></ViewSnippet>
+			<React.Fragment>
+				<NavBar />
+				<ViewSnippet snippet={this.state.snippet}></ViewSnippet>
+			</React.Fragment>
 		)
 	}
 }

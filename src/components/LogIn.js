@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { logInUser } from '../utils/api';
+import NavBar from './NavBar';
 // Actions
 import { logInAction, initCreated, initStarred } from '../actions';
 
@@ -85,6 +86,7 @@ class LogIn extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
+				<NavBar />
 				<div className="container-fluid" style={{ width: "70%" }}>
 					<h3 className="display-5 text-center">Log In</h3>
 					<form onSubmit={this.handleSubmit}>
