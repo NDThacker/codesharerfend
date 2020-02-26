@@ -6,8 +6,22 @@ import { compose } from 'redux';
 
 class NavBar extends React.Component {
 
+	constructor(props)
+	{
+		super(props);
+		this.state = {
+			sPhrase: ""
+		}
+	}
+	startSearch = () => {
+		this.props.cback(this.state.sPhrase);
+	}
+	handleChange = (event) => {
+		this.setState({ [event.target.name]: event.target.value });
+	}
+
 	render() {
-		console.log(this.props);
+
 		let isLoggedIn = Object.entries(this.props.uData).length > 0 ? true : false;
 
 		return (
@@ -20,7 +34,7 @@ class NavBar extends React.Component {
 						<Link className="nav-link" to="/submitsnippet">Submit-A-Snippet</Link>
 					</li>
 					<li className="nav-item" id="searchLink">
-					<input type="text" placeholder="Enter your keywords" id="searchBar" /><button id="searchButton"><i className="fa fa-search"></i></button>
+					<input type="text" placeholder="Enter your keywords" name="sPhrase" value={this.state.sPhrase} onChange={this.handleChange} id="searchBar" /><button onClick={this.startSearch} id="searchButton"><i className="fa fa-search"></i></button>
 					</li>
 				</ul>
 				<ul className="navbar-nav ml-auto">

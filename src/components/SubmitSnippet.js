@@ -35,7 +35,8 @@ class SubmitSnippet extends React.Component {
 		const enteredValue = event.target.value;
 		const newFormObj = this.state.form;
 		newFormObj[field] = enteredValue;
-		field != 'visibility' ? this.validateField(field, enteredValue) : null;
+		if(field != 'visibility')
+			this.validateField(field, enteredValue);
 		this.setState({});
 	}
 	validateField = (field, value) => {

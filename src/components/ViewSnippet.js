@@ -29,6 +29,16 @@ class ViewSnippet extends React.Component {
 			}
 		}
 	}
+	componentDidUpdate() {
+		const snippet = this.props.snippet;
+		console.log(snippet);
+		for (let snips of this.props.starNCreate.starred) {
+			if (snips._id == snippet._id) {
+				this.setState({ isStarred: true });
+				break;
+			}
+		}
+	}
 	render() {
 		const snippet = this.props.snippet;
 		return (
@@ -41,7 +51,7 @@ class ViewSnippet extends React.Component {
 					<p>Created: {new Date(snippet.creationTime).toUTCString()}</p>
 					<p>Modified: {new Date(snippet.modifiedTime).toUTCString()}</p>
 					<p>Expiry: {new Date(snippet.expiryTime).toUTCString()}</p>
-					<textarea value={snippet.content}></textarea>
+					<textarea value={snippet.content} readOnly></textarea>
 				</div>
 			</React.Fragment>
 		)

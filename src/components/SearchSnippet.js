@@ -1,7 +1,9 @@
 import React from 'react';
 import NavSearchBar from './NavSearchBar';
+import NavBar from './NavBar';
 import { withRouter } from 'react-router-dom';
 import { getSnippetById, searchSnippetByTitle } from '../utils/api';
+import DisplaySnippets from './DisplaySnippets';
 
 
 
@@ -17,7 +19,7 @@ class SearchSnippet extends React.Component {
 	}
 	getSearchPhrase = (sPhrase) => {
 		this.setState({ searchPhrase: sPhrase });
-		this.startSearch();
+		this.startSearch(sPhrase);
 	}
 
 	handleChange = event => {
@@ -25,17 +27,20 @@ class SearchSnippet extends React.Component {
 			[event.target.name]: event.target.value
 		});
 	}
-	startSearch = () => {
+	startSearch = (sPhrase) => {
 
 		switch (this.state.sBy) {
 			case "Title":
-				searchSnippetByTitle(this.state.searchPhrase).then(data => {
+				searchSnippetByTitle(sPhrase).then(data => {
+					console.log("data received")
 					this.setState({ fData: data });
 				}).catch(err => {
 					console.log(err.message);
 				})
+				break;
 			case "Id":
-				getSnippetById(this.state.searchPhrase).then(data => {
+				getSnippetById(sPhrase).then(data => {
+					console.log("data received")
 					this.setState({ fData: data });
 				}).catch(err => {
 					console.log(err.message);
@@ -44,22 +49,26 @@ class SearchSnippet extends React.Component {
 	}
 
 	render() {
+		let res = null;
+		if (this.state.fData !== null) {
+			res = <DisplaySnippets fData={this.state.fData} />
+		}
 		return (
 			<React.Fragment>
-				<NavSearchBar />
-				<h2>Searching</h2>
+				<NavSearchBar cback={this.startSearch} />
 				<div className="container-fluid">
 					<form>
-						<div class="form-check form-check-inline">
-							<label class="form-check-label">
-								<input className="form-check-input" type="radio" name="sBy" value="Title" /> By Title
+						<div className="form-check form-check-inline">
+							<label className="form-check-label">
+								<input className="form-check-input" type="radio" name="sBy" value="Title" checked={this.state.sBy == "Title"} onChange={this.handleChange} /> By Title
 							</label>
-							<label class="form-check-label">
-								<input className="form-check-input" type="radio" name="sBy" value="Id" /> By ID
+							<label className="form-check-label">
+								<input className="form-check-input" type="radio" name="sBy" value="Id" checked={this.state.sBy == "Id"} onChange={this.handleChange} /> By ID
 							</label>
 						</div>
 					</form>
 				</div>
+				<div>{res}</div>
 			</React.Fragment>
 		);
 	}

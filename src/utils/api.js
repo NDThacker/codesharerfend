@@ -52,6 +52,7 @@ export const searchSnippetByTitle = (title) => {
 	}).catch(error => {
 		let err = new Error();
 		if(error.response) {
+			console.log(error.response);
 			err.message = error.response.data.message;
 		}
 		else {
