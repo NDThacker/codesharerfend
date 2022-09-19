@@ -82,7 +82,7 @@ class SubmitSnippet extends React.Component {
 		submitSnippet(this.state.form).then(sid => {
 			//navigate to show snippet with generated id
 			if (this.state.isLoggedIn) {
-				submitSnippetToUser(this.state.form, sid, this.state.logInEmail).then(status => {
+				submitSnippetToUser(sid, this.state.logInEmail).then(status => {
 					this.props.history.push('/fetchsnippet/' + sid.url);	
 				}).catch(err => {
 					console.log(err.message);
@@ -127,7 +127,7 @@ class SubmitSnippet extends React.Component {
 						</div>
 						<div className="form-check form-check-inline">
 							<label className="form-check-label">
-								<input className="form-check-input" onChange={this.handleChange} type="radio" name="visibility" id="vpub" value="Public" checked={this.state.form.visibility == "Private"} />Public</label>
+								<input className="form-check-input" onChange={this.handleChange} type="radio" name="visibility" id="vpub" value="Public" checked={this.state.form.visibility == "Public"} />Public</label>
 							<label className="form-check-label">
 								<input disabled={!this.state.isLoggedIn} onChange={this.handleChange} checked={this.state.form.visibility == "Private"} className="form-check-input" type="radio" name="visibility" id="vpriv" value="Private" />Private</label>
 							&nbsp;<span><small>Usable only if you are a logged in user</small></span>
