@@ -37,7 +37,7 @@ export const submitSnippet = (sObj) => {
 	}).catch(error => {
 		let err = new Error();
 		if(error.response) {
-			err.message = error.response.data.message;
+			err.message = error.response.error; //error.response.data.message;
 		}
 		else {
 			err.message = "Server Down..!";

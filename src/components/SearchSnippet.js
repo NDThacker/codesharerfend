@@ -32,7 +32,6 @@ class SearchSnippet extends React.Component {
 		switch (this.state.sBy) {
 			case "Title":
 				searchSnippetByTitle(sPhrase).then(data => {
-					console.log("data received")
 					this.setState({ fData: data });
 				}).catch(err => {
 					console.log(err.message);
@@ -40,9 +39,9 @@ class SearchSnippet extends React.Component {
 				break;
 			case "Id":
 				getSnippetById(sPhrase).then(data => {
-					console.log("data received")
 					this.setState({ fData: data });
 				}).catch(err => {
+					this.setState({ fData: null })
 					console.log(err.message);
 				})
 		}
