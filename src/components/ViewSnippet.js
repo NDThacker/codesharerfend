@@ -21,20 +21,20 @@ class ViewSnippet extends React.Component {
 	}
 	componentDidMount() {
 		const snippet = this.props.snippet;
-		console.log(snippet);
+		// console.log(snippet);
 		for (let snips of this.props.starNCreate.starred) {
 			if (snips._id == snippet._id) {
-				this.setState({ isStarred: true });
+				//this.setState({ isStarred: true });
 				break;
 			}
 		}
 	}
 	componentDidUpdate() {
 		const snippet = this.props.snippet;
-		console.log(snippet);
+		// console.log(snippet);
 		for (let snips of this.props.starNCreate.starred) {
 			if (snips._id == snippet._id) {
-				this.setState({ isStarred: true });
+				//this.setState({ isStarred: true });
 				break;
 			}
 		}

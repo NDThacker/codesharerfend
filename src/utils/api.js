@@ -17,8 +17,8 @@ export const getSnippetById = (sId) => {
 	})
 }
 
-export const submitSnippetToUser = (sObjAndEmail) => {
-	return axios.put(apiUrl + 'submitsnippettouser', sObjAndEmail).then(response => {
+export const submitSnippetToUser = (sid, email) => {
+	return axios.put(apiUrl + 'submitsnippettouser', {sid: sid, email: email}).then(response => {
 		return response.data;
 	}).catch(error => {
 		let err = new Error();

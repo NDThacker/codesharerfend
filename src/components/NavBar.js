@@ -7,8 +7,9 @@ import { compose } from 'redux';
 class NavBar extends React.Component {
 
 	render() {
-		console.log(this.props);
+		// console.log(this.props);
 		let isLoggedIn = Object.entries(this.props.uData).length > 0 ? true : false;
+		console.debug(this.props);
 
 		return (
 			<nav className="navbar navbar-expand-md bg-dark navbar-dark">

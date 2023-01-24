@@ -2,6 +2,8 @@ import React from 'react';
 import NavBar from './NavBar';
 import { submitSnippet, submitSnippetToUser } from '../utils/api';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 
 class SubmitSnippet extends React.Component {
@@ -28,6 +30,10 @@ class SubmitSnippet extends React.Component {
 		isLoggedIn: false,
 		logInEmail: "",
 		validCount: 0
+	}
+	componentDidMount()
+	{
+		this.setState({isLoggedIn: (Object.entries(this.props.uData).length > 0), logInEmail: this.props.uData._id});
 	}
 
 	handleChange = event => {
@@ -79,10 +85,11 @@ class SubmitSnippet extends React.Component {
 	}
 	handleSubmit = (event) => {
 		event.preventDefault();
+		console.debug(this.state);
 		submitSnippet(this.state.form).then(sid => {
 			//navigate to show snippet with generated id
 			if (this.state.isLoggedIn) {
-				submitSnippetToUser(sid, this.state.logInEmail).then(status => {
+				submitSnippetToUser(sid.url, this.state.logInEmail).then(status => {
 					this.props.history.push('/fetchsnippet/' + sid.url);	
 				}).catch(err => {
 					console.log(err.message);
@@ -143,4 +150,10 @@ class SubmitSnippet extends React.Component {
 
 }
 
-export default withRouter(SubmitSnippet);
+const mapStateToProps = (state) => {
+	return {
+		uData: state.loggingReducer
+	}
+}
+
+export default compose(connect(mapStateToProps), withRouter)(SubmitSnippet);
