@@ -11,7 +11,7 @@ class ViewSnippet extends React.Component {
 		isStarred: false
 	}
 	addStarred = () => {
-		this.props.dispatch(addToStarredAction(this.props.snippet));
+		this.props.dispatch(addToStarredAction(this.props.snippet._id));
 		this.setState({ isStarred: true });
 	}
 
@@ -19,26 +19,17 @@ class ViewSnippet extends React.Component {
 		this.props.dispatch(removeFromStarredAction(this.props.snippet._id));
 		this.setState({ isStarred: false });
 	}
-	componentDidMount() {
+	componentWillMount() {
 		const snippet = this.props.snippet;
 		// console.log(snippet);
-		for (let snips of this.props.starNCreate.starred) {
-			if (snips._id == snippet._id) {
-				//this.setState({ isStarred: true });
+		for (let sids of this.props.starNCreate.starred) {
+			if (sids == snippet._id) {
+				this.setState({ isStarred: true });
 				break;
 			}
 		}
 	}
-	componentDidUpdate() {
-		const snippet = this.props.snippet;
-		// console.log(snippet);
-		for (let snips of this.props.starNCreate.starred) {
-			if (snips._id == snippet._id) {
-				//this.setState({ isStarred: true });
-				break;
-			}
-		}
-	}
+
 	render() {
 		const snippet = this.props.snippet;
 		return (

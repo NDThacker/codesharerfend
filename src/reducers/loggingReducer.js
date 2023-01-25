@@ -5,7 +5,7 @@ export const loggingReducer = (state = { }, action) => {
 	switch(action.type)
 	{
 		case USER_LOGIN:
-			state = action.uData;
+			state = { ...action.uData};
 			return state
 		case USER_LOGOUT:
 			state = {};

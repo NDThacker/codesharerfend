@@ -30,8 +30,12 @@ class NavBar extends React.Component {
 					</li>
 						<li className="nav-item">
 							<Link className="nav-link" to="/signup">Sign up</Link>
-						</li></React.Fragment> :
-						<li className="nav-item text-light">Hellow, {this.props.uData.name}</li>}
+						</li></React.Fragment> :<React.Fragment>
+						<li className="nav-item text-light">Hellow, {this.props.uData.name}</li>
+						<li className="nav-item ml-auto">
+						<Link className="nav-link" to="/logout">Log out</Link>
+					</li>
+						</React.Fragment>}
 
 				</ul>
 			</nav>
@@ -42,7 +46,8 @@ class NavBar extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		uData: state.loggingReducer
+		uData: state.loggingReducer,
+		starNCreate: state.starNCreateReducer
 	}
 }
 

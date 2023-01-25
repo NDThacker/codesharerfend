@@ -16,19 +16,19 @@ export const logOutAction = () => ({
 	type: USER_LOGOUT
 })
 
-export const addToStarredAction = (snippet) => ({
+export const addToStarredAction = (sid) => ({
 	type: ADD_TO_STARRED,
-	snippet
+	sid
 })
 
-export const removeFromStarredAction = (sId) => ({
+export const removeFromStarredAction = (sid) => ({
 	type: REMOVE_FROM_STARRED,
-	sId
+	sid
 })
 
-export const addToCreatedAction = (snippet) => ({
+export const addToCreatedAction = (sid) => ({
 	type: ADD_IN_CREATED,
-	snippet
+	sid
 })
 
 export const initStarred = (starred) => ({

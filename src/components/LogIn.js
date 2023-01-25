@@ -71,11 +71,12 @@ class LogIn extends React.Component {
 		event.preventDefault();
 		logInUser(this.state.form).then(udata => {
 			//save udata somewhere
-			console.log(udata);
+			
 			this.props.dispatch(initCreated(udata.created));
 			this.props.dispatch(initStarred(udata.starred));
 			delete udata.starred;
 			delete udata.created;
+			// console.log(udata);
 			this.props.dispatch(logInAction(udata));
 			this.props.history.push("/");
 		}).catch(err => {
