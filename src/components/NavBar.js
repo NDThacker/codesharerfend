@@ -1,10 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { logOutAction, emptyStarred, emptyCreated } from '../actions';
+import { updateCreatedInUser, updateStarredInUser} from '../utils/api'
 
 
 class NavBar extends React.Component {
+
+
+	handleLogOut = async (event) => {
+		let responseStarred = await updateStarredInUser(this.props.starNCreate.starred);
+		let responseCreated = await updateStarredInUser(this.props.starNCreate.created);
+		this.props.dispatch(logOutAction());
+		this.props.dispatch(emptyCreated());
+		this.props.dispatch(emptyStarred());
+		if(responseCreated && responseStarred)
+		{
+			this.props.history.push("/")
+		}
+	}
+
 
 	render() {
 		// console.log(this.props);
@@ -31,10 +47,8 @@ class NavBar extends React.Component {
 						<li className="nav-item">
 							<Link className="nav-link" to="/signup">Sign up</Link>
 						</li></React.Fragment> :<React.Fragment>
-						<li className="nav-item text-light">Hellow, {this.props.uData.name}</li>
-						<li className="nav-item ml-auto">
-						<Link className="nav-link" to="/logout">Log out</Link>
-					</li>
+						<li className="nav-link text-light">Hellow, {this.props.uData.name}&nbsp;&nbsp;</li>
+						<li className="nav-item" onClick={this.handleLogOut}><Link className="nav-link" >Log out</Link></li>
 						</React.Fragment>}
 
 				</ul>
@@ -51,4 +65,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default compose(connect(mapStateToProps))(NavBar);
+export default compose(connect(mapStateToProps), withRouter)(NavBar);

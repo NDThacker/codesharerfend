@@ -2,6 +2,39 @@ import axios from 'axios';
 
 const apiUrl = "http://localhost:1050/";
 
+export const updateStarredInUser = (starred) => {
+	return axios.put(apiUrl + "updatestarredinuser", {starred}).then(responseStatus => {
+		return responseStatus;
+	}).catch(error => {
+		let err = new Error();
+		if(error.response)
+		{
+			err.message = error.response.data.message;
+		}
+		else {
+			err.message = "Server Down..!";
+		}
+	})
+}
+
+export const updateCreatedInUser = (created) => {
+	return axios.put(apiUrl + "updatecreatedinuser", {created}).then(responseStatus => {
+		return responseStatus;
+	}).catch(error => {
+		let err = new Error();
+		if(error.response)
+		{
+			err.message = error.response.data.message;
+		}
+		else {
+			err.message = "Server Down..!";
+		}
+	})
+
+}
+
+
+
 export const getSnippetById = (sId) => {
 	return axios.get(apiUrl + 'getsnippetbyid/' + sId).then(response => {
 		return response.data;

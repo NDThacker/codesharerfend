@@ -17,7 +17,6 @@ class App extends React.Component {
 				<Router>
 					<Switch>
 						<Route exact path="/login" component={LogIn} />
-						<Route exact path="/logout" component={LogOut} />
 						<Route exact path="/signup" component={SignUp} />
 						<Route exact path="/submitsnippet" component={SubmitSnippet} />
 						<Route exact path="/fetchsnippet/:sid" component={FetchSnippet} />
