@@ -7,7 +7,6 @@ import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import SearchSnippet from './components/SearchSnippet';
 import Home from './components/Home';
-import LogOut from './components/LogOut';
 
 
 class App extends React.Component {

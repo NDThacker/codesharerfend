@@ -2,8 +2,24 @@ import axios from 'axios';
 
 const apiUrl = "http://localhost:1050/";
 
-export const updateStarredInUser = (starred) => {
-	return axios.put(apiUrl + "updatestarredinuser", {starred}).then(responseStatus => {
+export const getRecentSnippets = () => {
+	return axios.get(apiUrl + "getrecentsnippets").then(snipsArray => {
+		return snipsArray.data;
+	}).catch(error => {
+		let err = new Error();
+		if(error.message)
+		{
+			err.message = error.response.data.message;
+		}
+		else
+		{
+			err.message = "Server Down..!";
+		}
+	})
+}
+
+export const updateStarredInUser = (starred, email) => {
+	return axios.put(apiUrl + "updatestarredinuser", {starred, email}).then(responseStatus => {
 		return responseStatus;
 	}).catch(error => {
 		let err = new Error();
@@ -17,8 +33,8 @@ export const updateStarredInUser = (starred) => {
 	})
 }
 
-export const updateCreatedInUser = (created) => {
-	return axios.put(apiUrl + "updatecreatedinuser", {created}).then(responseStatus => {
+export const updateCreatedInUser = (created, email) => {
+	return axios.put(apiUrl + "updatecreatedinuser", {created, email}).then(responseStatus => {
 		return responseStatus;
 	}).catch(error => {
 		let err = new Error();
@@ -81,6 +97,7 @@ export const submitSnippet = (sObj) => {
 
 export const searchSnippetByTitle = (title) => {
 	return axios.get(apiUrl + 'searchsnippetbytitle/' + title).then(response => {
+		console.log(response);
 		return response.data;
 	}).catch(error => {
 		let err = new Error();

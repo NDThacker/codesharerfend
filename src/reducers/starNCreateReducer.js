@@ -20,7 +20,7 @@ export const starNCreateReducer = (state = { starred: [], created: [] }, action)
 
 		case REMOVE_FROM_STARRED:
 			state.starred = state.starred.filter((ele) => {
-				if (ele != action.sid)
+				if (ele !== action.sid)
 					return true;
 				else return false;
 			});
