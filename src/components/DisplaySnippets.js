@@ -27,48 +27,48 @@ class DisplaySnippets extends React.Component {
 		this.setState({ navigateToView: idx })
 	}
 	render() {
-		// console.log(this.state);
+		
 		if (this.state.navigateToView !== -1) {
 			return (
 				<React.Fragment>
-					<ViewSnippet snippet={this.state.fData[0][this.state.navigateToView]} />
+					<ViewSnippet snippet={this.state.fData[this.state.navigateToView]} />
 				</React.Fragment>
 			);
 		}
 		if(this.state.isArr)
 		{
-			if (this.state.fData[0].length === 0)
+			if (this.state.fData.length === 0)
 				return (<React.Fragment><h4>No Search Results</h4></React.Fragment>);
-			else if (this.state.fData[0].length > 0) {
+			else if (this.state.fData.length > 0) {
 
-				let size = this.state.fData[0].length;
-				console.debug(this.state.fData);
+				let size = this.state.fData.length;
+				// console.debug(this.state.fData);
 				let colsNrow = [];
 				
 				for(let idx = 0; idx < size; idx = idx + 3)
 				{
 					let cols2 = []
-					cols2.push(<div className='col-md-3' key={idx} >
-						<span onClick={() =>  this.navigateToShow(idx) }><h4>{"Title: " + this.state.fData[0][idx].title}</h4></span>
-						<h5>{"Author: " + this.state.fData[0][idx].author}</h5>
+					cols2.push(<div className='col-md-3 border border-primary' key={idx} >
+						<span onClick={() =>  this.navigateToShow(idx) }><h4>{"Title: " + this.state.fData[idx].title}</h4></span>
+						<h5>{"Author: " + this.state.fData[idx].author}</h5>
 						</div>);
 
 					if(idx + 1 < size)
 					{
-						cols2.push(<div className='col-md-3' key={idx+1} >
-							<span onClick={() =>  this.navigateToShow(idx+1) }><h4>{"Title: " + this.state.fData[0][idx+1].title}</h4></span>
-							<h5>{"Author: " + this.state.fData[0][idx+1].author}</h5>
+						cols2.push(<div className='col-md-3 border border-primary' key={idx+1} >
+							<span onClick={() =>  this.navigateToShow(idx+1) }><h4>{"Title: " + this.state.fData[idx+1].title}</h4></span>
+							<h5>{"Author: " + this.state.fData[idx+1].author}</h5>
 							</div>);
 					}
 					if(idx + 2 < size)
 					{
-						cols2.push(<div className='col-md-3' key={idx+2} >
-							<span onClick={() =>  this.navigateToShow(idx+2) }><h4>{"Title: " + this.state.fData[0][idx+2].title}</h4></span>
-							<h5>{"Author: " + this.state.fData[0][idx+2].author}</h5>
+						cols2.push(<div className='col-md-3 border border-primary' key={idx+2} >
+							<span onClick={() =>  this.navigateToShow(idx+2) }><h4>{"Title: " + this.state.fData[idx+2].title}</h4></span>
+							<h5>{"Author: " + this.state.fData[idx+2].author}</h5>
 							</div>);
 					}
 
-					console.debug(cols2)
+					// console.debug(cols2)
 					colsNrow.push(<div key={idx} className="row">
 						{cols2}
 					</div>);

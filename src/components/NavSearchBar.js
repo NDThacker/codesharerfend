@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { logOutAction, emptyStarred, emptyCreated } from '../actions';
+import { updateCreatedInUser, updateStarredInUser} from '../utils/api';
 
 
 class NavBar extends React.Component {
@@ -20,6 +22,19 @@ class NavBar extends React.Component {
 		this.setState({ [event.target.name]: event.target.value });
 	}
 
+	handleLogOut = async (event) => {
+		console.log(this.props.starNCreate.starred);
+		let responseStarred = await updateStarredInUser(this.props.starNCreate.starred, this.props.uData._id);
+		let responseCreated = await updateCreatedInUser(this.props.starNCreate.created, this.props.uData._id);
+		this.props.dispatch(logOutAction());
+		this.props.dispatch(emptyCreated());
+		this.props.dispatch(emptyStarred());
+		if(responseCreated && responseStarred)
+		{
+			this.props.history.push("/")
+		}
+	}
+
 	render() {
 
 		let isLoggedIn = Object.entries(this.props.uData).length > 0 ? true : false;
@@ -34,7 +49,7 @@ class NavBar extends React.Component {
 						<Link className="nav-link" to="/submitsnippet">Submit-A-Snippet</Link>
 					</li>
 					<li className="nav-item" id="searchLink">
-					<input type="text" placeholder="Enter your keywords" name="sPhrase" value={this.state.sPhrase} onChange={this.handleChange} id="searchBar" /><button onClick={this.startSearch} id="searchButton"><i className="fa fa-search"></i></button>
+						<input type="text" placeholder="Enter your keywords" name="sPhrase" value={this.state.sPhrase} onChange={this.handleChange} id="searchBar" /><button onClick={this.startSearch} id="searchButton"><i className="fa fa-search"></i></button>
 					</li>
 				</ul>
 				<ul className="navbar-nav ml-auto">
@@ -43,8 +58,10 @@ class NavBar extends React.Component {
 					</li>
 						<li className="nav-item">
 							<Link className="nav-link" to="/signup">Sign up</Link>
-						</li></React.Fragment> :
-						<li className="nav-item text-light">Hellow, {this.props.uData.name}</li>}
+						</li></React.Fragment> :<React.Fragment>
+						<li className="nav-link text-light">Hellow, {this.props.uData.name}&nbsp;&nbsp;</li>
+						<li className="nav-item" onClick={this.handleLogOut}><Link className="nav-link" >Log out</Link></li>
+						</React.Fragment>}
 
 				</ul>
 			</nav>
@@ -53,10 +70,13 @@ class NavBar extends React.Component {
 }
 
 
+
+
 const mapStateToProps = (state) => {
 	return {
-		uData: state.loggingReducer
+		uData: state.loggingReducer,
+		starNCreate: state.starNCreateReducer
 	}
 }
 
-export default compose(connect(mapStateToProps))(NavBar);
+export default compose(connect(mapStateToProps), withRouter)(NavBar);

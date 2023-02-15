@@ -23,7 +23,7 @@ class ViewSnippet extends React.Component {
 		const snippet = this.props.snippet;
 		// console.log(snippet);
 		for (let sids of this.props.starNCreate.starred) {
-			if (sids == snippet._id) {
+			if (sids === snippet._id) {
 				this.setState({ isStarred: true });
 				break;
 			}
@@ -35,14 +35,14 @@ class ViewSnippet extends React.Component {
 		return (
 			<React.Fragment>
 				<div className="container-fluid">
-					<h2 className="display-5 text-center">{snippet.title}</h2>{this.state.isStarred ?
+					<h2 className="display-5 text-center">{snippet.title}&nbsp;{this.state.isStarred ?
 						<span><i className="fas fa-star" aria-hidden="true" onClick={this.removeStarred}></i></span> :
-						<span><i className="fa fa-star-o" aria-hidden="true" onClick={this.addStarred}></i></span>}
-					<h5 className="text-right">Author: {snippet.author}</h5>
+						<span><i className="fa fa-star-o" aria-hidden="true" onClick={this.addStarred}></i></span>}</h2>
+					<h5 className="text-left">Author: {snippet.author}</h5>
 					<p>Created: {new Date(snippet.creationTime).toUTCString()}</p>
 					<p>Modified: {new Date(snippet.modifiedTime).toUTCString()}</p>
 					<p>Expiry: {new Date(snippet.expiryTime).toUTCString()}</p>
-					<textarea value={snippet.content} readOnly></textarea>
+					<textarea rows="10" cols="40" value={snippet.content} readOnly></textarea>
 				</div>
 			</React.Fragment>
 		)

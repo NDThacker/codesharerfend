@@ -1,6 +1,5 @@
 import React from 'react';
 import NavSearchBar from './NavSearchBar';
-import NavBar from './NavBar';
 import { withRouter } from 'react-router-dom';
 import { getSnippetById, searchSnippetByTitle } from '../utils/api';
 import DisplaySnippets from './DisplaySnippets';
@@ -59,10 +58,10 @@ class SearchSnippet extends React.Component {
 					<form>
 						<div className="form-check form-check-inline">
 							<label className="form-check-label">
-								<input className="form-check-input" type="radio" name="sBy" value="Title" checked={this.state.sBy == "Title"} onChange={this.handleChange} /> By Title
+								<input className="form-check-input" type="radio" name="sBy" value="Title" checked={this.state.sBy === "Title"} onChange={this.handleChange} /> By Title
 							</label>
 							<label className="form-check-label">
-								<input className="form-check-input" type="radio" name="sBy" value="Id" checked={this.state.sBy == "Id"} onChange={this.handleChange} /> By ID
+								<input className="form-check-input" type="radio" name="sBy" value="Id" checked={this.state.sBy === "Id"} onChange={this.handleChange} /> By ID
 							</label>
 						</div>
 					</form>

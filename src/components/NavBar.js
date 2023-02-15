@@ -1,15 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { logOutAction, emptyStarred, emptyCreated } from '../actions';
+import { updateCreatedInUser, updateStarredInUser} from '../utils/api';
 
 
 class NavBar extends React.Component {
 
+
+	handleLogOut = async (event) => {
+		console.log(this.props.starNCreate.starred);
+		let responseStarred = await updateStarredInUser(this.props.starNCreate.starred, this.props.uData._id);
+		let responseCreated = await updateCreatedInUser(this.props.starNCreate.created, this.props.uData._id);
+		this.props.dispatch(logOutAction());
+		this.props.dispatch(emptyCreated());
+		this.props.dispatch(emptyStarred());
+		if(responseCreated && responseStarred)
+		{
+			this.props.history.push("/")
+		}
+	}
+
+
 	render() {
 		// console.log(this.props);
 		let isLoggedIn = Object.entries(this.props.uData).length > 0 ? true : false;
-		console.debug(this.props);
 
 		return (
 			<nav className="navbar navbar-expand-md bg-dark navbar-dark">
@@ -31,10 +47,8 @@ class NavBar extends React.Component {
 						<li className="nav-item">
 							<Link className="nav-link" to="/signup">Sign up</Link>
 						</li></React.Fragment> :<React.Fragment>
-						<li className="nav-item text-light">Hellow, {this.props.uData.name}</li>
-						<li className="nav-item ml-auto">
-						<Link className="nav-link" to="/logout">Log out</Link>
-					</li>
+						<li className="nav-link text-light">Hellow, {this.props.uData.name}&nbsp;&nbsp;</li>
+						<li className="nav-link" onClick={this.handleLogOut}>Log out</li>
 						</React.Fragment>}
 
 				</ul>
@@ -51,4 +65,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default compose(connect(mapStateToProps))(NavBar);
+export default compose(connect(mapStateToProps), withRouter)(NavBar);

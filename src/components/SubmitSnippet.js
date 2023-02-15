@@ -27,8 +27,8 @@ class SubmitSnippet extends React.Component {
 			content: false,
 			buttonActive: false
 		},
-		isLoggedIn: false,
-		logInEmail: "",
+		isLoggedIn: (Object.entries(this.props.uData).length > 0),
+		logInEmail: this.props.uData._id,
 		validCount: 0
 	}
 	componentDidMount()
@@ -41,7 +41,7 @@ class SubmitSnippet extends React.Component {
 		const enteredValue = event.target.value;
 		const newFormObj = this.state.form;
 		newFormObj[field] = enteredValue;
-		if(field != 'visibility')
+		if(field !== 'visibility')
 			this.validateField(field, enteredValue);
 		this.setState({});
 	}
@@ -65,7 +65,7 @@ class SubmitSnippet extends React.Component {
 		if (formMessage === "") {
 			if (!this.state.formValidity[field]) {
 				formValidityObj[field] = true;
-				if(this.state.validCount == 2)
+				if(this.state.validCount === 2)
 					formValidityObj["buttonActive"] = true;
 				this.setState({ validCount: this.state.validCount + 1 });
 			}
@@ -134,9 +134,9 @@ class SubmitSnippet extends React.Component {
 						</div>
 						<div className="form-check form-check-inline">
 							<label className="form-check-label">
-								<input className="form-check-input" onChange={this.handleChange} type="radio" name="visibility" id="vpub" value="Public" checked={this.state.form.visibility == "Public"} />Public</label>
+								<input className="form-check-input" onChange={this.handleChange} type="radio" name="visibility" id="vpub" value="Public" checked={this.state.form.visibility === "Public"} />Public</label>
 							<label className="form-check-label">
-								<input disabled={!this.state.isLoggedIn} onChange={this.handleChange} checked={this.state.form.visibility == "Private"} className="form-check-input" type="radio" name="visibility" id="vpriv" value="Private" />Private</label>
+								<input disabled={!this.state.isLoggedIn} onChange={this.handleChange} checked={this.state.form.visibility === "Private"} className="form-check-input" type="radio" name="visibility" id="vpriv" value="Private" />Private</label>
 							&nbsp;<span><small>Usable only if you are a logged in user</small></span>
 						</div>
 						<div>

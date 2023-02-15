@@ -5,6 +5,8 @@ export const REMOVE_FROM_STARRED = "REMOVE_FROM_STARRED";
 export const ADD_IN_CREATED = "ADD_IN_CREATED";
 export const INIT_STARRED = "INIT_STARRED";
 export const INIT_CREATED = "INIT_CREATED";
+export const EMPTY_CREATED = "EMPTY_CREATED"
+export const EMPTY_STARRED = "EMPTY_STARRED";
 
 
 export const logInAction = (uData) => ({
@@ -39,4 +41,12 @@ export const initStarred = (starred) => ({
 export const initCreated = (created) => ({
 	type: INIT_CREATED,
 	created
+})
+
+export const emptyStarred = () => ({
+	type: EMPTY_STARRED
+})
+
+export const emptyCreated = () => ({
+	type: EMPTY_CREATED
 })
