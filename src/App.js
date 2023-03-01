@@ -7,6 +7,7 @@ import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import SearchSnippet from './components/SearchSnippet';
 import Home from './components/Home';
+import UserProfile from './components/UserProfile';
 
 
 class App extends React.Component {
@@ -20,6 +21,7 @@ class App extends React.Component {
 						<Route exact path="/submitsnippet" component={SubmitSnippet} />
 						<Route exact path="/fetchsnippet/:sid" component={FetchSnippet} />
 						<Route exact path="/searchsnippet" component={SearchSnippet} />
+						<Route exact path="/userprofile" component={UserProfile} />
 						<Route path="/*" component={Home} />
 					</Switch>
 				</Router>

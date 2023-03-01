@@ -41,7 +41,7 @@ class SignUp extends React.Component {
 		if (formMessage === "") {
 			if (!this.state.formValidity[field]) {
 				formValidityObj[field] = true;
-				if(this.state.validCount == 2)
+				if(this.state.validCount === 2)
 					formValidityObj["buttonActive"] = true;
 				this.setState({ validCount: this.state.validCount + 1 });
 			}

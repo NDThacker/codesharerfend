@@ -42,7 +42,7 @@ class LogIn extends React.Component {
 		if (formMessage === "") {
 			if (!this.state.formValidity[field]) {
 				formValidityObj[field] = true;
-				if(this.state.validCount == 1)
+				if(this.state.validCount === 1)
 					formValidityObj["buttonActive"] = true;
 				this.setState({ validCount: this.state.validCount + 1 });
 			}
