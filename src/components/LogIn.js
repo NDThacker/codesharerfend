@@ -88,7 +88,7 @@ class LogIn extends React.Component {
 		return (
 			<React.Fragment>
 				<NavBar />
-				<div className="container-fluid" style={{ width: "70%" }}>
+				<div className="container" style={{ width: "30%" }}>
 					<h3 className="display-5 text-center">Log In</h3>
 					<form onSubmit={this.handleSubmit}>
 						<div className="form-group">

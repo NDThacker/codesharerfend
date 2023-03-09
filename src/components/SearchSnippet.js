@@ -13,7 +13,7 @@ class SearchSnippet extends React.Component {
 		this.state = {
 			searchPhrase: "",
 			sBy: "Title",
-			fData: null
+			fData: undefined
 		};
 	}
 	getSearchPhrase = (sPhrase) => {
@@ -33,6 +33,7 @@ class SearchSnippet extends React.Component {
 				searchSnippetByTitle(sPhrase).then(data => {
 					this.setState({ fData: data });
 				}).catch(err => {
+					this.setState({ fData: null })
 					console.log(err.message);
 				})
 				break;
@@ -48,7 +49,7 @@ class SearchSnippet extends React.Component {
 
 	render() {
 		let res = null;
-		if (this.state.fData !== null) {
+		if (this.state.fData !== undefined) {
 			res = <DisplaySnippets fData={this.state.fData} />
 		}
 		return (
@@ -59,7 +60,7 @@ class SearchSnippet extends React.Component {
 						<div className="form-check form-check-inline">
 							<label className="form-check-label">
 								<input className="form-check-input" type="radio" name="sBy" value="Title" checked={this.state.sBy === "Title"} onChange={this.handleChange} /> By Title
-							</label>
+							</label>&nbsp;&nbsp;
 							<label className="form-check-label">
 								<input className="form-check-input" type="radio" name="sBy" value="Id" checked={this.state.sBy === "Id"} onChange={this.handleChange} /> By ID
 							</label>

@@ -102,7 +102,7 @@ export const searchSnippetByTitle = (title) => {
 		let err = new Error();
 		if(error.response) {
 			console.log(error.response);
-			err.message = error.response.data.message;
+			err.message = error.response.data.error;
 		}
 		else {
 			err.message = "Server Down..!";
