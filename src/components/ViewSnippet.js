@@ -19,14 +19,19 @@ class ViewSnippet extends React.Component {
 		this.props.dispatch(removeFromStarredAction(this.props.snippet._id));
 		this.setState({ isStarred: false });
 	}
-	componentWillMount() {
+
+	componentWillMount()
+	{
 		const snippet = this.props.snippet;
-		// console.log(snippet);
-		for (let sids of this.props.starNCreate.starred) {
-			if (sids === snippet._id) {
-				this.setState({ isStarred: true });
-				break;
-			}
+		this.setState({ isStarred: this.props.starNCreate.starred.includes(snippet._id)})
+	}
+
+	componentDidUpdate() {
+		const snippet = this.props.snippet;
+
+		if(this.state.isStarred !== this.props.starNCreate.starred.includes(snippet._id))
+		{
+			this.setState({ isStarred: this.props.starNCreate.starred.includes(snippet._id)})
 		}
 	}
 

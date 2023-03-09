@@ -41,7 +41,7 @@ class SignUp extends React.Component {
 		if (formMessage === "") {
 			if (!this.state.formValidity[field]) {
 				formValidityObj[field] = true;
-				if(this.state.validCount == 2)
+				if(this.state.validCount === 2)
 					formValidityObj["buttonActive"] = true;
 				this.setState({ validCount: this.state.validCount + 1 });
 			}
@@ -79,7 +79,7 @@ class SignUp extends React.Component {
 		return (
 			<React.Fragment>
 				<NavBar />
-				<div className="container-fluid" style={{ width: "70%" }}>
+				<div className="container-fluid" style={{ width: "30%" }}>
 					<h3 className="display-5 text-center">Sign Up</h3>
 					<form onSubmit={this.handleSubmit}>
 						<div className="form-group">

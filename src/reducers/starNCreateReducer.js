@@ -15,15 +15,17 @@ export const starNCreateReducer = (state = { starred: [], created: [] }, action)
 			return state;
 
 		case ADD_TO_STARRED:
-			state.starred.push(action.sid);
+			if(!state.starred.includes(action.sid))
+			{
+				state.starred.push(action.sid);
+			}
 			return state;
 
 		case REMOVE_FROM_STARRED:
-			state.starred = state.starred.filter((ele) => {
-				if (ele !== action.sid)
-					return true;
-				else return false;
-			});
+			if(state.starred.includes(action.sid))
+			{
+				state.starred.splice(state.starred.indexOf(action.sid), 1);
+			}
 			return state;
 
 		case ADD_IN_CREATED:

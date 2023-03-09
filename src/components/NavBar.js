@@ -46,8 +46,9 @@ class NavBar extends React.Component {
 					</li>
 						<li className="nav-item">
 							<Link className="nav-link" to="/signup">Sign up</Link>
-						</li></React.Fragment> :<React.Fragment>
-						<li className="nav-link text-light">Hellow, {this.props.uData.name}&nbsp;&nbsp;</li>
+						</li></React.Fragment>:
+						<React.Fragment>
+						<li className="nav-link text-light">Hellow,<Link className="text-light" to="/userprofile" tip="Go to My profile"> {this.props.uData.name}</Link>&nbsp;&nbsp;</li>
 						<li className="nav-link" onClick={this.handleLogOut}>Log out</li>
 						</React.Fragment>}
 

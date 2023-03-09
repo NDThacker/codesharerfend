@@ -42,7 +42,7 @@ class LogIn extends React.Component {
 		if (formMessage === "") {
 			if (!this.state.formValidity[field]) {
 				formValidityObj[field] = true;
-				if(this.state.validCount == 1)
+				if(this.state.validCount === 1)
 					formValidityObj["buttonActive"] = true;
 				this.setState({ validCount: this.state.validCount + 1 });
 			}
@@ -88,7 +88,7 @@ class LogIn extends React.Component {
 		return (
 			<React.Fragment>
 				<NavBar />
-				<div className="container-fluid" style={{ width: "70%" }}>
+				<div className="container" style={{ width: "30%" }}>
 					<h3 className="display-5 text-center">Log In</h3>
 					<form onSubmit={this.handleSubmit}>
 						<div className="form-group">

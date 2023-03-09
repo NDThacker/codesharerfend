@@ -97,13 +97,12 @@ export const submitSnippet = (sObj) => {
 
 export const searchSnippetByTitle = (title) => {
 	return axios.get(apiUrl + 'searchsnippetbytitle/' + title).then(response => {
-		console.log(response);
 		return response.data;
 	}).catch(error => {
 		let err = new Error();
 		if(error.response) {
 			console.log(error.response);
-			err.message = error.response.data.message;
+			err.message = error.response.data.error;
 		}
 		else {
 			err.message = "Server Down..!";
@@ -151,7 +150,6 @@ export const logInUser = (cdata) => {
 	}).catch(error => {
 		let err = new Error();
 		if(error.response) {
-			console.log(error.response)
 			err.message = error.response.data.error;
 		}
 		else {
