@@ -38,7 +38,7 @@ class DisplaySnippets extends React.Component {
 		if(this.state.isArr)
 		{
 			if (this.state.fData.length === 0)
-				return (<React.Fragment><h4>No Results</h4></React.Fragment>);
+				return (<h4>No Results</h4>);
 			else if (this.state.fData.length > 0) {
 
 				let size = this.state.fData.length;
