@@ -36,6 +36,8 @@ class LogIn extends React.Component {
 			case "password":
 				formMessage = (value.length > 0 ? "" : "Required field");
 				break;
+			default:
+				
 		}
 		let formValidityObj = this.state.formValidity;
 		let formErrorObj = this.state.formErrors;

@@ -35,6 +35,8 @@ class SignUp extends React.Component {
 			case "name":
 				formMessage = (value.length >= 3 ? "" : "Name should be at least three characters long");
 				break;
+			default:
+				
 		}
 		let formValidityObj = this.state.formValidity;
 		let formErrorObj = this.state.formErrors;
